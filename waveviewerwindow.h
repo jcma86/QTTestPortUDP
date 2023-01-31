@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QMdiSubWindow>
 #include <QUdpSocket>
+#include <QThread>
 
 #include "statistics.h"
 
@@ -23,6 +24,7 @@ private slots:
 private:
     Ui::WaveViewerWindow *ui;
 
+    QThread *socketThread;
     QUdpSocket *socket;
     quint16 port = 10002;
 
