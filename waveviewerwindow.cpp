@@ -59,6 +59,10 @@ void WaveViewerWindow::configureSocket()
 
     processPendingDatagrams();
     connect(socket, &QUdpSocket::readyRead, this, &WaveViewerWindow::processPendingDatagrams);
+
+    // Send socket to thread to prevent blocking UI.
+    socketThread = new QThread(this);
+    socket->moveToThread(socketThread);
 }
 
 // Method triggered when we receive data
@@ -135,4 +139,3 @@ void WaveViewerWindow::on_pushButton_clicked(bool checked)
         ui->pushButton->setText("Start");
     }
 }
-
